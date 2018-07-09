@@ -1,0 +1,9 @@
+*.wav
+
+!Bach.wav
+!C.wav
+!GlassHit.wav
+!GlassRing.wav
+!HelloVoice.wav
+!WaterShift.wav
+!yanny-laurel.wav

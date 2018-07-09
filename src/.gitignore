@@ -1,0 +1,10 @@
+*.wav
+*.music
+__pycache__
+web
+tests
+build
+dist
+tuning_fork.egg-info
+!GlassHit.wav
+!Mary.music

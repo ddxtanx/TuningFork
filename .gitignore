@@ -1,0 +1,12 @@
+<<<<<<< HEAD
+web
+__pycache__
+=======
+*.wav
+*.music
+__pycache__
+web
+tests
+!GlassHit.wav
+!Mary.music
+>>>>>>> 0b253efe4efd6a7e3a5f5357b891c85796622570
