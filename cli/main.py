@@ -8,6 +8,7 @@ from tuning_fork import TuningFork
 
 
 def main() -> None:
+    # TODO: rewrite with CLI tool
     bpm = 100
 
     filename1 = sys.argv[1]
@@ -23,6 +24,7 @@ def main() -> None:
     wP, sr = TuningFork.sampleWAVFileIntoMusic(filename1, filename2, bpm)
     librosa.output.write_wav("{0}_ShiftedTo_{1}.wav".format(name1, name2), wP, sr)
     os.system("play {0}_ShiftedTo_{1}.wav".format(name1, name2))
+
 
 if __name__ == "__main__":
     main()
