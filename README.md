@@ -14,13 +14,19 @@ This project does require python3.6 since I use mypy annotations to help me out.
 
 # CLI Usage
 
-You need two things to run this program effectively: a sampled wavefile and a .music file.
+    usage: tuning-fork [-h] [--bpm BPM] [--out OUT] [--play] wavfile musicfile
 
-To sample the wavefile into the .music run
+    Autotune a wavfile to a .music file
 
-    tuning-fork (wavfile) (musicfile) ((bpm))
+    positional arguments:
+    wavfile     The path to the wavfile you want to autotune.
+    musicfile   The path to the music file you want the wavfile autotuned to.
 
-The bpm is optional, and specifying it will set the samplefile's length to be consistent with the bpm. BPM is automatically 100
+    optional arguments:
+    -h, --help  show this help message and exit
+    --bpm BPM   The bpm you want the song to play at.
+    --out OUT   The desired output file.
+    --play      Automatically play after wavfile is created.
 
 # Python Usage
 
