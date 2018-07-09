@@ -5,8 +5,8 @@ import librosa
 from tuning_fork import TuningFork
 from tuning_fork.tools.analysis import Analysis
 
-wav1, sr1 = librosa.core.load("../examples/Bach.wav")
-wav2, sr2 = librosa.core.load("../examples/C.wav")
+wav1, sr1 = librosa.core.load("../examples/WavFiles/Bach.wav")
+wav2, sr2 = librosa.core.load("../examples/WavFiles/C.wav")
 
 
 class TuningForkTest(unittest.TestCase):

@@ -103,7 +103,7 @@ class TuningFork():
         currentFrequency = Analysis.startingNote(waveForm, sr)
         freqRatio = shiftTo/float(currentFrequency)
         shift = np.log2(freqRatio)
-        shiftedPitchWF = TuningFork.shiftPitchBy(waveForm, sr, 12*shift)
+        shiftedPitchWF = shiftPitchBy(waveForm, sr, 12*shift)
         return TuningFork.speedUpTo(shiftedPitchWF, sr, spb)
 
     @staticmethod

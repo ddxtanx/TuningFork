@@ -92,12 +92,12 @@ class Analysis():
             waveForm transformed into the (audible) frequency domain.
         """
         fft = np.fft.rfft(waveForm)
-        mfft = list(
-            filter(
-                lambda x: (x >= 200) and (x <= 2000)
-            ),
-            fft
-        )
+        mfft = []
+        for x in fft:
+            if x <= 200 or x >= 2000:
+                mfft.append(0)
+            else:
+                mfft.append(abs(x))
         return np.array(mfft)
 
     @staticmethod

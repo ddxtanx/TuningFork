@@ -77,7 +77,7 @@ class ParseMusicTest(unittest.TestCase):
         self.assertTupleEqual(expFreq3, actFreq3, "Empty Note")
 
     def test_parse_file(self) -> None:
-        filename = "../examples/TestSong.music"
+        filename = "../examples/MusicFiles/TestSong.music"
         expParsed = ParseMusic.fileToFrequency(filename)
         actParsed = [
             [(261.63, 1.0)],
