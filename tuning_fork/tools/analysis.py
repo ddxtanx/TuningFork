@@ -1,4 +1,3 @@
-from numbers import Number
 from typing import List, Tuple, Union
 
 import librosa
@@ -43,7 +42,11 @@ def loadFromFile(fileName: str) -> Tuple[np.ndarray, int]:
     return (wf, sr)
 
 
-def getNSecondsFromWaveForm(waveForm: np.ndarray, sr: int, seconds: float) -> np.ndarray:
+def getNSecondsFromWaveForm(
+        waveForm: np.ndarray,
+        sr: int,
+        seconds: float
+        ) -> np.ndarray:
     return waveForm[:secondsToSamples(seconds, sr)]
 
 

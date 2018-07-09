@@ -1,4 +1,7 @@
 web
 __pycache__
+build
+dist
+*.pyc
 *.wav
-*.music
+tuning_fork.egg-info

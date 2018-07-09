@@ -1,10 +1,11 @@
 import math
-from typing import List, Tuple
+from typing import List, Tuple, TypeVar
 
 # Global Types
 noteTupleDuration = Tuple[str, int, float, int]
 noteTuple = Tuple[str, int, float]
 frequencyTuple = Tuple[float, float]
+T = TypeVar('T')
 # Note tuple has (Note Letter, Octave, Duration(, repetition times))
 
 # Global Variables
@@ -14,19 +15,19 @@ shiftDict = {
     "A#": 1,
     "Bf": 1,
     "B": 2,
-    "C": 3,
-    "C#": 4,
-    "Df": 4,
-    "D": 5,
-    "D#": 6,
-    "Ef": 6,
-    "E": 7,
-    "F": 8,
-    "F#": 9,
-    "Gf": 9,
-    "G": 10,
-    "G#": 11,
-    "Af": 11
+    "C": -9,
+    "C#": -8,
+    "Df": -8,
+    "D": -7,
+    "D#": -6,
+    "Ef": -6,
+    "E": -5,
+    "F": -4,
+    "F#": -3,
+    "Gf": -3,
+    "G": -2,
+    "G#": -1,
+    "Af": -1
 }
 
 baseFreq = 440  # A4 is 440
@@ -38,7 +39,7 @@ def isFloat(s: str) -> bool:
     return s.replace(".", "").isdigit()
 
 
-def appendMultipleTimes(l: list, a: any, i: int) -> list:
+def appendMultipleTimes(l: List[T], a: T, i: int) -> list:
     c = 0
     nl = l
     while c < i:
@@ -47,7 +48,7 @@ def appendMultipleTimes(l: list, a: any, i: int) -> list:
     return nl
 
 
-def lastCharInString(s: str) -> chr:
+def lastCharInString(s: str) -> str:
     return s[len(s)-1]
 
 
@@ -90,7 +91,10 @@ class ParseMusic():
         ):
             nums = int(parts[currIndex][:-1])
             currIndex += 1
-        if isFloat(parts[currIndex]) and lastCharInString(parts[currIndex]) != 'x':
+        if (
+            isFloat(parts[currIndex]) and
+            lastCharInString(parts[currIndex]) != 'x'
+        ):
             duration = float(parts[currIndex])
             currIndex += 1
         noteString = parts[currIndex]
@@ -165,8 +169,7 @@ class ParseMusic():
         note, octave, duration = noteT
         if note == "_":
             return (0, duration)
-        semitoneDiff = (octave-4 - 1)*12 + shiftDict[note]
-        # -1 to account for the fact that octaves start at 0.
+        semitoneDiff = (octave-4)*12 + shiftDict[note]
         roundedFreq = round(baseFreq * math.pow(expBase, semitoneDiff), 2)
         return (roundedFreq, duration)
 

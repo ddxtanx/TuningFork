@@ -32,17 +32,20 @@ in your imports and all code will be loaded!
 
 `tuning_fork` itself contains methods for pitch shifting, so, to shift a wav to a .music, you can run
 
-    tf.sampleWAVFileIntoMusic("wavfilename", "musicfilename", (bpm))
+    TF = tf.TuningFork
+    TF.sampleWAVFileIntoMusic("wavfilename", "musicfilename", (bpm))
 
 and that will return a librosa style ndarray that represents the WAV encoding of the autotuned song.
 
 Along with normal functions, `tuning_fork` also exposes analysis and parseMusic.
 
 * analysis
+  * Available via `from tuning_fork.tools.analysis import Analysis`
   * Deals with the analysis of a wavfile.
   * Most useful exports are `startingNote` and `startingNoteFromFile`
     * These methods take in some reference to a wavfile (depending on the function) and returns the approximate starting note frequency of the song.
 
 * parseMusic
+  * Available via `from tuning_fork.tools.parseMusic import ParseMusic`
   * Deals with parsing .music files
   * Fairly useful all around, take a look around the source or the `help(parseMusic)` to find what will fit you!

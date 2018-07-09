@@ -1,11 +1,10 @@
-import os
-import sys
 from typing import Tuple
 
 import librosa
 import numpy as np
 from scipy.io import wavfile
-from tools import analysis, parseMusic
+from tuning_fork.tools.analysis import Analysis
+from tuning_fork.tools.parseMusic import ParseMusic
 
 
 def getSPB(bpm: float) -> float:
@@ -65,7 +64,7 @@ class TuningFork():
             ) -> np.ndarray:
         spb = getSPB(bpm)
 
-        currentFrequency = analysis.startingNote(noteArray, sr)
+        currentFrequency = Analysis.startingNote(noteArray, sr)
         freqRatio = shiftTo/float(currentFrequency)
         shift = np.log2(freqRatio)
         shiftedPitchWF = TuningFork.shiftPitchBy(noteArray, sr, 12*shift)
@@ -113,7 +112,7 @@ class TuningFork():
         waveForm, _ = librosa.core.load(wavFileName, sr)
 
         waveForm, _ = librosa.effects.trim(waveForm)
-        freqList = parseMusic.fileToFrequency(musicFileName)
+        freqList = ParseMusic.fileToFrequency(musicFileName)
 
         wP = TuningFork.sampleIntoSong(waveForm, sr, freqList, bpm=bpm)
         return (wP, sr)
