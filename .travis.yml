@@ -2,6 +2,6 @@ language: python
 python:
   "3.6"
 install:
-  pip3.6 install tuning_fork_cli tuning_fork
+  pip3.6 install --upgrade .
 script:
   cd tests && ./runAllTests.sh
