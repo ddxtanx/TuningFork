@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tuning_fork_cli",
-    version="1.0",
+    version="1.0.1",
     author="Garrett Credi",
     author_email="gcc@ameritech.net",
     description="CLI for tuning_fork",
