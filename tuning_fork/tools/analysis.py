@@ -54,6 +54,20 @@ def getNSecondsFromWaveForm(
 class Analysis():
     @staticmethod
     def condenseToSingleChannel(waveForm: np.ndarray) -> np.ndarray:
+        """Condenses multi-channel waveforms down to one channel.
+
+        This is done by taking the first channel value, no other black magic.
+        Parameters
+        ----------
+        waveForm : np.ndarray
+            A waveform that might be multi channel.
+
+        Returns
+        -------
+        np.ndarray
+            The waveform condensed to a single channel.
+
+        """
         waveFormList = waveForm.tolist()
         if (isinstance(waveFormList[0], list)):
             waveFormSingleChannel = np.array(
@@ -64,18 +78,45 @@ class Analysis():
         return waveFormSingleChannel
 
     @staticmethod
-    def rfftAudible(waveForm: genlist) -> List:
+    def rfftAudible(waveForm: np.ndarray) -> np.ndarray:
+        """Take a (real-valued) Fast Fourier transform of a waveform.
+
+        Parameters
+        ----------
+        waveForm : np.ndarray
+            Single Channel waveform.
+
+        Returns
+        -------
+        np.ndarray
+            waveForm transformed into the (audible) frequency domain.
+        """
         fft = np.fft.rfft(waveForm)
-        mfft = []
-        for n in range(0, len(fft)):
-            if n < 150 or n > 3000:
-                mfft.append(0)
-            else:
-                mfft.append(np.sqrt(fft[n].real**2 + fft[n].imag**2))
-        return mfft
+        mfft = list(
+            filter(
+                lambda x: (x >= 200) and (x <= 2000)
+            ),
+            fft
+        )
+        return np.array(mfft)
 
     @staticmethod
     def startingNote(waveForm: ndarray, sr: int) -> int:
+        """Get's the starting note of a waveform.
+
+        Parameters
+        ----------
+        waveForm : ndarray
+            Any ol' waveform.
+        sr : int
+            Sample rate of the waveform.
+
+        Returns
+        -------
+        int
+            The most dominant frequency of waveForm in the first 1.5 seconds.
+
+        """
         sc = Analysis.condenseToSingleChannel(waveForm)
         beatSample = getNSecondsFromWaveForm(sc, sr, 1.5)
         trimmed, _ = librosa.effects.trim(beatSample)
@@ -84,5 +125,19 @@ class Analysis():
 
     @staticmethod
     def startingNoteFromFile(fileName: str) -> int:
+        """Convienient wrapper for startingNote to load file automatically.
+
+        For more info see startingNote
+        Parameters
+        ----------
+        fileName : str
+            fileName of wavFile.
+
+        Returns
+        -------
+        int
+            Dominant frequency present in fileName.
+
+        """
         waveForm, sr = loadFromFile(fileName)
         return Analysis.startingNote(waveForm, sr)
