@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tuning_fork",
-    version="1.5",
+    version="1.5.1",
     author="Garrett Credi",
     author_email="gcc@ameritech.net",
     description="A clip/sample auto tuner",
