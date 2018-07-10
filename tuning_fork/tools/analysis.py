@@ -2,7 +2,7 @@ from typing import List, Tuple, Union
 
 import librosa
 import numpy as np
-from scipy.io import wavfile
+import soundfile as sf
 
 ndarray = np.ndarray
 genlist = Union[ndarray, list]
@@ -37,8 +37,7 @@ def chunkAverage(l: genlist, chunkSize: int) -> genlist:
 
 
 def loadFromFile(fileName: str) -> Tuple[np.ndarray, int]:
-    sr, _ = wavfile.read(fileName, "rb")
-    wf, _ = librosa.core.load(fileName)
+    wf, sr = sf.read(fileName, always_2d=True)
     return (wf, sr)
 
 
@@ -68,14 +67,13 @@ class Analysis():
             The waveform condensed to a single channel.
 
         """
-        waveFormList = waveForm.tolist()
-        if (isinstance(waveFormList[0], list)):
-            waveFormSingleChannel = np.array(
-                map(lambda l: l[0], waveForm)
+        shape = waveForm.shape
+        if len(shape) == 2 and waveForm.shape[1] == 2:
+            retArr = np.array(
+                list(map(lambda l: l[0], waveForm))
             )
-        else:
-            waveFormSingleChannel = waveForm
-        return waveFormSingleChannel
+            return retArr
+        return waveForm
 
     @staticmethod
     def rfftAudible(waveForm: np.ndarray) -> np.ndarray:

@@ -24,6 +24,14 @@ class TuningForkTest(unittest.TestCase):
         error = math.fabs(note - 500)
         self.assertLessEqual(error, 20, "Pitch Shift")
 
+    def test_sample_wavfile_into_music(self) -> None:
+        musicFile = "../examples/MusicFiles/Scales.music"
+        TuningFork.sampleWAVFileIntoMusic(
+            "../examples/WavFiles/C.wav",
+            musicFile,
+            120
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -21,7 +21,9 @@ class TestAnalysisMethods(unittest.TestCase):
         self.assertLessEqual(error, 15, "Starting Note Wav")
 
     def test_starting_note_from_file(self):
-        experimentalFreq = Analysis.startingNoteFromFile("../examples/WavFiles/C.wav")
+        experimentalFreq = Analysis.startingNoteFromFile(
+            "../examples/WavFiles/C.wav"
+        )
         actualFreq = 261.1
         error = math.fabs(actualFreq - experimentalFreq)
         self.assertLessEqual(error, 15, "Starting Note File")

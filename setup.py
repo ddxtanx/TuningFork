@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tuning_fork",
-    version="1.3.4",
+    version="1.4",
     author="Garrett Credi",
     author_email="gcc@ameritech.net",
     description="A clip/sample auto tuner",
@@ -19,5 +19,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ),
-    install_requires=["librosa", "scipy", "numpy"]
+    install_requires=["librosa", "numpy", "pysoundfile"]
 )

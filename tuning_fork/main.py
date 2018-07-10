@@ -2,7 +2,7 @@ from typing import Tuple
 
 import librosa
 import numpy as np
-from scipy.io import wavfile
+import soundfile as sf
 from tuning_fork.tools.analysis import Analysis
 from tuning_fork.tools.parseMusic import ParseMusic
 
@@ -171,7 +171,7 @@ class TuningFork():
                     empty = TuningFork.emptyBeatTrack(sampleTrack, sr, bpm)
                     nextParts.append(empty)
             avgArr = np.array(mdArrayAverage(nextParts))
-            spedUpPart = TuningFork.speedUpBy(avgArr, sr, 1.0/duration)
+            spedUpPart = speedUpBy(avgArr, sr, 1.0/duration)
             song = np.concatenate((song, spedUpPart))
         return song
 
@@ -198,10 +198,10 @@ class TuningFork():
             A tuple consisting of the fitted song and the sample rate of it.
 
         """
-        sr, _ = wavfile.read(wavFileName)
-        waveForm, _ = librosa.core.load(wavFileName, sr)
+        waveForm, sr = sf.read(wavFileName)
 
         waveForm, _ = librosa.effects.trim(waveForm)
+        waveForm = Analysis.condenseToSingleChannel(waveForm)
         freqList = ParseMusic.fileToFrequency(musicFileName)
 
         wP = TuningFork.sampleIntoSong(waveForm, sr, freqList, bpm=bpm)
