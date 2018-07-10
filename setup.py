@@ -15,9 +15,16 @@ setuptools.setup(
     packages=["tuning_fork", "tuning_fork.tools"],
     py_modules=["tuning_fork.main"],
     classifiers=(
-        "Programming Language :: Python :: 3",
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Console",
+        "Intended Audience :: Developers",
+        "Natural Language :: English",
+        "Programming Language :: Python :: 3.6",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+        "Topic :: Multimedia :: Sound/Audio :: Mixers",
+        "Topic :: Multimedia :: Sound/Audio :: Analysis",
+        "Topic :: Utilities"
     ),
     install_requires=["librosa", "numpy", "pysoundfile"]
 )
