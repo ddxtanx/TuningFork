@@ -66,6 +66,35 @@ Chords are literally just notes separated by commas.
 
 A major C chord would be `C5, E, G`, etc..
 
+# Bonus Options
+If you have a repeating section of music like
+
+    C1
+    C2
+    C3
+    C1
+    C2
+    C3
+    C1
+    C2
+    C3
+
+you can avoid repeating it all of those times and just write
+
+    SR 2
+    C1
+    C2
+    C3
+    ER
+
+`SR` stands for Start Repetition and can optionally take, as an argument, the
+number of times you would like to additionally repeat. The default number of
+repetitions is 1. To signify the end of the repeated portion of music, add an `ER` which stands for End Repetition.
+
+## Note!
+
+`SR 3` will not loop a section 3 times, it will loop it 4 times. Once for the original section of music and thrice for the repetition will make 4 total repetitions.
+
 # tl;dr
 
 Notes are in the format `(repeat)x (duration) (note)(octave)`
@@ -74,6 +103,8 @@ Chords are comma-separated notes
 
 A song is line-separated chords
 
+Repetitions are started by `SR [num reps]` and ended by `ER`
+
 # tl;drt tl;dr
 
-A song is a csv of notes with a .music on the end
+A song is a csv of notes with a .music on the end and bonus options for repeat sections.

@@ -1,6 +1,6 @@
 {
     "name": "tuning_fork",
-    "version": "1.6.1",
+    "version": "1.7.1",
     "author": "Garrett Credi",
     "author_email": "gcc@ameritech.net",
     "description": "A clip/sample auto tuner",

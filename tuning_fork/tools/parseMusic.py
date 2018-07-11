@@ -133,12 +133,28 @@ class ParseMusic():
 
         """
         parsedArray = []  # type: List[List[noteTuple]]
-
+        repeatArray = []
+        repeating = False
+        repeatTimes = 1
         for note in noteArray:
             arr = []
+            if "SR" in note:
+                repeating = True
+                if note != "SR":
+                    repeatTimes = int(note.split(" ")[1])
+                    # Start repeat is of the form "SR [num times to repeat]"
+                continue
+            if note == "ER":
+                repeating = False
+                for i in range(0, repeatTimes):
+                    parsedArray = parsedArray + repeatArray
+                repeatArray = []
+                continue
             if "," not in note:
                 ns, o, d, n = ParseMusic.parseNoteString(note)
                 appendMultipleTimes(parsedArray, [(ns, o, d)], n)
+                if repeating:
+                    appendMultipleTimes(repeatArray, [(ns, o, d)], n)
                 continue
             else:
                 splitArr = note.split(",")
@@ -148,6 +164,8 @@ class ParseMusic():
                     ns, o, _, n = ParseMusic.parseNoteString(partialNote)
                     arr.append((ns, o, genDuration))
             parsedArray.append(arr)
+            if repeating:
+                repeatArray.append(arr)
 
         return parsedArray
 

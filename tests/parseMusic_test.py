@@ -89,6 +89,38 @@ class ParseMusicTest(unittest.TestCase):
         ]
         self.assertListEqual(expParsed, actParsed, "Parse File")
 
+    def test_repeat(self) -> None:
+        filename = "../examples/MusicFiles/RepeatTest.music"
+        expParsed = ParseMusic.fileToFrequency(filename)
+        actParsed = [
+            [(261.63, 1)],
+            [(293.66, 1), (587.33, 1)],
+            [(329.63, 1)],
+            [(329.63, 1)],
+            [(369.99, 2)],
+            [(415.30, .5)],
+
+            [(261.63, 1)],
+            [(293.66, 1), (587.33, 1)],
+            [(329.63, 1)],
+            [(329.63, 1)],
+            [(369.99, 2)],
+            [(415.30, .5)],
+
+            [(261.63, 1)],
+            [(293.66, 1)],
+            [(329.63, 1)],
+
+            [(261.63, 1)],
+            [(293.66, 1)],
+            [(329.63, 1)],
+
+            [(261.63, 1)],
+            [(293.66, 1)],
+            [(329.63, 1)]
+        ]
+        self.assertListEqual(expParsed, actParsed, "Repeat")
+
 
 if __name__ == "__main__":
     unittest.main()
